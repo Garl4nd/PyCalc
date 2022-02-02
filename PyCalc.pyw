@@ -379,7 +379,7 @@ class Calc(QMainWindow):
         return p
     def load_settings(self):
         try:
-            with open("../calc_settings.json") as setfile:
+            with open("calc_settings.json") as setfile:
                 
                 self.settings=json.loads(setfile.read())
                 #print("success")
@@ -391,7 +391,7 @@ class Calc(QMainWindow):
             
             self.settings=self.default_settings
             try:
-                with open("../calc_settings.json","w") as f:
+                with open("calc_settings.json","w") as f:
                     json.dump(self.settings,f,indent=2)
             except PermissionError as pe:
                 self.error_dialog.showMessage(str(pe))

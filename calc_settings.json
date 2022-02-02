@@ -1,12 +1,30 @@
 {
-"parser": 
-        {
-        "implicit": true, 
-        "fill_implicit_ops": true
-}, 
-"division": 
-        {
-        "use_colors": true, 
-        "color_mode": 1, 
-        "size": 18}
+  "design": {
+    "dimensions": [
+      450,
+      235
+    ],
+    "button_style": "background-color: None",
+    "display_style": "background-color: None",
+    "button_font_height_ratio": 0.3,
+    "display_font_height_ratio": 0.4,
+    "display_to_keyboard_percentage": 18
+  },
+  "parser": {
+    "implicit_conversion": true,
+    "implicit_ops": true,
+    "fractions": true,
+    "solve_w_complex": true,
+    "solformat": true,
+    "restrict_symb": false,
+    "backend": "Qt5Agg"
+  },
+  "draw_division": {
+    "use_colors": true,
+    "color_mode": 1,
+    "size": 18
+  },
+  "draw_parse_tree": {
+    "size0": 20
+  }
 }
