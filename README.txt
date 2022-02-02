@@ -55,9 +55,9 @@ If the expression is a vector field of two variables, it will be plotted with th
 metric plot (circle in this case), while using the "plot2" command (or "ctrl+i") produces a 2-D vector field, assuming that the variable represents the x-coordinate.
 If you use variable names such as "r", or "φ", a polar plot will be produced.  You can turn this off by writing "polar off". Conversely, you can convert any plot to a polar plot by writing "polar on".
 If you want to animate a function, add anim to the end of the expression to be plotted. For example, you can write "plot sin(tx) anim", or write "sin(tx) anim" and press ctrl+p. 
+This also works for functions of three variables, e.g. writing "sin(txy) anim" and pressing ctrl+p produces a 2-D animation. It is always assumed that the  variable that increases with time is the one with lowest rank in the alphabet.
 To control the animation speed, use arrows, to pause the animation, press "space" or left-click the expression. Right-clicking the expression reverses the flow of time.
 To limit  the time variable from 0 to 10, you can add "t0=0 t1=10". If you want one second of real time to correspond to one second of the mathematical time, add "realtime"
 (e.g., the animation "sin(t) t0=0 t1=10 realtime" would last 10 s). 
 
-Writing "realtime" to 
-This also works for functions of three variables, e.g. writing "sin(txy) anim" and pressing ctrl+p produces a 2-D animation. It is always assumed that the  variable that increases with time is the one with lowest rank in the alphabet.
+
