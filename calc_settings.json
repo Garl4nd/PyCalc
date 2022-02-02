@@ -1,0 +1,12 @@
+{
+"parser": 
+        {
+        "implicit": true, 
+        "fill_implicit_ops": true
+}, 
+"division": 
+        {
+        "use_colors": true, 
+        "color_mode": 1, 
+        "size": 18}
+}
