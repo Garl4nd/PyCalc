@@ -31,9 +31,9 @@ Iterated maps, bifurcation diagrams: map(-x/1.04,init) |init=1,2,3 tden 120    m
 Some formulas and simplifications: simp(expr) |expr->sqrt(x)^2,sin(2x),cosh(2x),xsin(x)^2+xcos(x)^2+sinh(x)^2-cosh(x)^2,tan(2x),sinh(2x),exp(ln(x)),simp(exp(ix))
 
 
-All parentheses are interchangable.
+All parentheses are interchangable, but must be consistent. For example, both {(x+y)*z)} and ({x+y}*z) are valid and equivalent. However, [{(x+y)*z]} is invalid, because the parentheses are not matching. 
 
-You can use "\" before certain expressions, to convert them to special symbols. For example, writing "\sqrt" and pressing "space" converts "\sqrt" to "√[]". As another example, "\nabla"+"space" and "\dot"+"space" 
+You can use "\" before certain expressions to convert them to special symbols. For example, writing "\sqrt" and pressing "space" converts "\sqrt" to "√[]". As another example, "\nabla"+"space" and "\dot"+"space" 
 yields "∇·", which you can use to calculate the divergence of a vector field. You can also use this to convert Greek letters to their respective symbols (e.g. "\alpha" -> α)
 
 The "|" and "where" symbols are equivalent, they are used to manipulate the expression to their left according to assignments to their right. They can be used inside expressions and nested, 
@@ -48,10 +48,13 @@ with the components representing a single entity. For example, asking the parser
 right expression representing its x and y coordinates, respectively. Similarly, "xy,sin(xy)" produces two 2-D plots while "(xy,sin(xy)" produces a single plot of a 2-D vector field. 
 The expression "dot(x,y) |x=(1,2);y=(2,4)" behaves as expected, but with "dot(x,y) |x=1,2;y=2,4" the parser tries to evaluate dot(1,2),dot(1,4),dot(2,2),dot(2,4) and so fails, because the arguments are not vectors.
 
-To plot a function (e.g. sin(x) ), you can either write "plot sin(x)", or you can write "sin(x)" and press ctrl+p. If you enclose the 
-To plot a function of two variables (e.g. sin(xy)), you can either write "plot2 sin(xy)", or write "sin(xy)" and press ctrl+i. If the function is complex, (x^2+ixy), the plots of its magnitude and phase will be produced.
-If you want to see the real and imaginary part instead, add "reim" to the end of the target expression (e.g. (x^2+ixy reim)).
-If the expression is a vector field of two variables, it will be plotted with the arrows, e.g. (x,y^2). If it is a 2-D vector field of one variable (e.g. [cos(t),sin(t)] ), using the "plot" command  (or "ctrl+p") produces a para-
+To plot a function (e.g. sin(x) ), you can either write "plot sin(x)", or you can write "sin(x)" and press ctrl+p or click the "Plot" button. 
+To specify the limits (e.g. from 0 to 2π), write "from 0 to 2pi" to the end of the command. 
+You can also press "ctrl+f" to produce the "from" and move the cursor right behind it. Similarly, press "ctrl+t" to produce the "to".
+To plot a function of two variables (e.g. sin(xy)), you can either write "plot2 sin(xy)", or write "sin(xy)" and press ctrl+i or click the "2D plot" button. 
+If the function is complex, e.g., (x^2+ixy), the plots of its magnitude and phase will be produced. If you want to see the real and imaginary part instead, add "reim" to the end of the target expression (e.g., (x^2+ixy reim)).
+If the expression is a vector field of two variables, e.g., (x,y^2), it will be visualised with the arrows showing direction and colors showing magnitude.
+If it is a 2-D vector field of one variable (e.g. [cos(t),sin(t)] ), using the "plot" command  (or "ctrl+p") produces a para-
 metric plot (circle in this case), while using the "plot2" command (or "ctrl+i") produces a 2-D vector field, assuming that the variable represents the x-coordinate.
 If you use variable names such as "r", or "φ", a polar plot will be produced.  You can turn this off by writing "polar off". Conversely, you can convert any plot to a polar plot by writing "polar on".
 If you want to animate a function, add anim to the end of the expression to be plotted. For example, you can write "plot sin(tx) anim", or write "sin(tx) anim" and press ctrl+p. 
@@ -60,4 +63,7 @@ To control the animation speed, use arrows, to pause the animation, press "space
 To limit  the time variable from 0 to 10, you can add "t0=0 t1=10". If you want one second of real time to correspond to one second of the mathematical time, add "realtime"
 (e.g., the animation "sin(t) t0=0 t1=10 realtime" would last 10 s). 
 
+The list of all modificators that can be added to the right of the expression and sent to the plotter is:
+
+"from","to","style","pden","grid","polar","cont","hold","anim","equal","save","realtime","t0","t1","tden","slice","reim","legend","data","scale","loglog","hline","vline"
 
