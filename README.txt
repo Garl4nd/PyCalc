@@ -18,13 +18,13 @@ Systems of linear equations: 3x+2y-z=5;2x+y+z=6;x+y+z=7    x+y=5;2x+2y=10    2x+
 Evaluation of general expressions: xy*tan(z) where x=4;z=7     x^2sin(y) |y=pi/2;x=1,3...9     f(x) |f->sin,cos,tan,atan;x=(0,pi/6,pi/4,pi/3,pi/2)     x^2 where x=sin(y) where y=cos(z)     x^2 | x=sin(y) | y=cos(z)     exp(-x)' | x=4    sum([x^2 where x=1,3..11])    mul([x^2 where x=2,4..10])
 Ordinary and special functions:sin(x), cos(x), tan(x),asin(x), exp(x), ln(e),log(10),cosh(x),atanh(x) |x=pi/6   sin(pi/[1,2,3,4,6])   sqrt(-1),asin(10),ln(-1)   sqrt(-1+0i),asin(10+0i),ln(-1+0i)    gammafunc(4.5),erf(x),erfc(x),betafunc(4,2), J1(n, x), J2(n, x) | n=0;x=pi/6
 Custom functions: f(2,4) where f(x,y):=x*y^2     f(x,g(x)) where f(x,y):=xy and g(x):=sin(x)     sin(x),usin(x) where usin(x):=max(0,sin(x)) from 0 to 8pi   f(x,g(x))|f(x,y):=xy;g(x):=sin(x)    f(x)' |f(x):=sin(x^2),xexp(-x)       q(xy) |q(a):=grad(3a^2),rot(0,0,a)
-A few combinatoric and statistical functions:(choose(n,k) |k=0..n) |n=0..5    sum(choose(n,k) |k=0..n) |n=0..8    {binom(p,n,k) where p=0.7;k:=0..n} where n=50   poisson(k,λ) |λ=35;k=0..50    normal(x, μ, σ) |μ=10;σ=1 from 5 to 15    lognormal(x, μ, σ) |μ=1;σ=1 from 0.1 to 10   gammadist(x, α, β) |α=10..30;β=1/2 from 0 to 100   betadist(x, α, β) |α=5;β=1..20 from 0 to 1   MB(v, T, M) |T=273.15;M=29 from 0 to 1500   BT(rate,sensitivity,specificity) |rate=0.15;sensitivity=0.85;specificity=0.9
+A few combinatoric and statistical functions: (choose(n,k) |k=0..n) |n=0..5    sum(choose(n,k) |k=0..n) |n=0..8    {binom(p,n,k) where p=0.7;k:=0..n} where n=50   poisson(k,λ) |λ=35;k=0..50    normal(x, μ, σ) |μ=10;σ=1 from 5 to 15    lognormal(x, μ, σ) |μ=1;σ=1 from 0.1 to 10   gammadist(x, α, β) |α=10..30;β=1/2 from 0 to 100   betadist(x, α, β) |α=5;β=1..20 from 0 to 1   MB(v, T, M) |T=273.15;M=29 from 0 to 1500   BT(rate,sensitivity,specificity) |rate=0.15;sensitivity=0.85;specificity=0.9
 Ordinary and partial derivatives: sin(cos(x))', (xy^2z^3)_x , (xy^2z^3)_(x,y,z,z)   a^x'    der[sin(x)cos(xy),x,y]
 Vector calculus: dot([a, b], [x, y])    [a, b]*[x, y]    [a, b]_1*[x, y]_2    grad(xy)    (y,x^2,z^2x)_x    rot{cross[(y, x, z), (x^2, z^3, y^4)]} |y=1    matmul(R,v) |R={[cos(f),sin(f)],[-sin(f),cos(f)]} where f=pi/4 ;v=(x,y)
-Discrete Fourier Transform:FT([1,2,3,4,5])     FT(exp(2πn/20) |n=1..20)    FT(exp(2πin/20) |n=1..20)    FT(1 |n=1..20)    IFT(FT([1,2,3,4,5]))    
+Discrete Fourier Transform: FT([1,2,3,4,5])     FT(exp(2πn/20) |n=1..20)    FT(exp(2πin/20) |n=1..20)    FT(1 |n=1..20)    IFT(FT([1,2,3,4,5]))    
 1-D ordinary and polar plots: x, x^2, x^3    x', x^2', x^3' data    sin(t) style . pden 100  exp(it)    J1(k, x) |k=1..5 from 0,-1 to 20,1 binom(p, n, k) |n=20, k=12 from 0 to 1 grid on   (x/a)^2+(y/b)**2=1 |a=0.5;b=0.25  sin(4f)  sqrt(cos(2x)) polar pden 20000
 1-D parametric plots: (8sin[7t], 3cos[12t])  (sin(t)sqrt{abs[cos(t)]}/[sin(t)+7/5]-2sin(t)+2,t+npi/2) |n=1..4 polar legend off   (sin(2t)^2,cos(9t)+npi/2) |n=0...3 polar   ([b(k-1)]sin(t)-bsin[t(k-1)],[b(k-1)]cos(t)+bcos[t(k-1)]) |b=2;k=0.5,2.5,5 from -6pi to 6pi
-2-D plots of functions, vector fields and complex functions: sin(kxy) |k=1,5..20     grad(sin(xy)) from -pi to pi    grad(sin(xy)) from (-pi,-2pi) to (pi,2pi)    (xy,xy^2,xsin(y)^2,cos(xy)) slice 2,4     (r, f)    (x+iy+0.5i)*(x+iy-0.4-0.5i) cont 50 sqrt[(x+iy+0.5)*(x+iy-0.5+0.1i)] cont 0    sqrt[(x+iy+0.5)*(x+iy-0.5+0.1i)] cont 50 reim    3exp(idot(k,x)) |k=(1,4);x=(x,y) reim
+2-D plots of functions, vector fields and complex functions: sin(kxy) |k=1,5..20     grad(sin(xy)) from -pi to pi	∇ sin(xy) from -π to π		grad(sin(xy)) from (-pi,-2pi) to (pi,2pi)    (xy,xy^2,xsin(y)^2,cos(xy)) slice 2,4     (r, f)    (x+iy+0.5i)*(x+iy-0.4-0.5i) cont 50 sqrt[(x+iy+0.5)*(x+iy-0.5+0.1i)] cont 0    sqrt[(x+iy+0.5)*(x+iy-0.5+0.1i)] cont 50 reim    3exp(idot(k,x)) |k=(1,4);x=(x,y) reim
 Radiation patterns: matmul((-1)^a*r*f+a*f*r,r)/norm(r)^2|a=0,1;f:=(1,0);r:=(x,y)   matmul((-1)^a*r*r/norm(r)^2+a*Id(3),matmul(s*n+n*s,r))/norm(r) |a=0,1; s:=(1,0,0);n:=(0,0,1);r:=(x,y,z);y=0 slice 1,3   matmul{(3r*p-p*r),r}/norm(r)^2 |p:=(0,1);r:=(x,y)
 Systems of ordinary differential equations, numerical integration: ode(-y,k) |k=1..10 |k=1..10    ode([dx,dy,0,-g],[0,0,vy,31]) |g=9.8;vy=0,2..10    ode(t^n,0) |n=1..5 t0=0 t1=1
 Boundary value problems: bvp([dx,dy,0,-10],[0,0,end,end]) |end=10,20..50   bvp([dx,dy,0,-10],[(1,0,0),(2,0,0),(1,1,xend),(4,1,vend)]) |xend=10;vend=20,10..-20
@@ -49,7 +49,7 @@ with the components representing a single entity. For example, asking the parser
 right expression representing its x and y coordinates, respectively. Similarly, "xy,sin(xy)" produces two 2-D plots while "(xy,sin(xy)" produces a single plot of a 2-D vector field. 
 The expression "dot(x,y) |x=(1,2);y=(2,4)" behaves as expected, but with "dot(x,y) |x=1,2;y=2,4" the parser tries to evaluate dot(1,2),dot(1,4),dot(2,2),dot(2,4) and so fails, because the arguments are not vectors.
 
-To plot a function (e.g. sin(x) ), you can either write "plot sin(x)", or you can write "sin(x)" and press ctrl+p or click the "Plot" button. 
+To plot a function (e.g. sin(x) ), you can either write "plot sin(x)", or you can write "sin(x)" and press ctrl+p or click the "Plot" button. You can plot multiple functions by using commas, e.g. plot x,x^2,x^3 
 To specify the limits (e.g. from 0 to 2π), write "from 0 to 2pi" to the end of the command. 
 You can also press "ctrl+f" to produce the "from" and move the cursor right behind it. Similarly, press "ctrl+t" to produce the "to".
 To plot a function of two variables (e.g. sin(xy)), you can either write "plot2 sin(xy)", or write "sin(xy)" and press ctrl+i or click the "2D plot" button. 
@@ -57,14 +57,47 @@ If the function is complex, e.g., (x^2+ixy), the plots of its magnitude and phas
 If the expression is a vector field of two variables, e.g., (x,y^2), it will be visualised with the arrows showing direction and colors showing magnitude.
 If it is a 2-D vector field of one variable (e.g. [cos(t),sin(t)] ), using the "plot" command  (or "ctrl+p") produces a para-
 metric plot (circle in this case), while using the "plot2" command (or "ctrl+i") produces a 2-D vector field, assuming that the variable represents the x-coordinate.
-If you use variable names such as "r", or "φ", a polar plot will be produced.  You can turn this off by writing "polar off". Conversely, you can convert any plot to a polar plot by writing "polar on".
+If you use variable names such as "r", or "φ", a polar plot will be produced.  You can turn this off by using the modifier "polar off". Conversely, you can convert any plot to a polar plot by writing "polar on".
 If you want to animate a function, add anim to the end of the expression to be plotted. For example, you can write "plot sin(tx) anim", or write "sin(tx) anim" and press ctrl+p. 
-This also works for functions of three variables, e.g. writing "sin(txy) anim" and pressing ctrl+p produces a 2-D animation. It is always assumed that the  variable that increases with time is the one with lowest rank in the alphabet.
+This also works for functions of three variables, e.g. writing "sin(txy) anim" and pressing ctrl+p produces a 2-D animation. It is always assumed that the  variable that increases with time is the one with lowest 
+rank in the alphabet.
 To control the animation speed, use arrows, to pause the animation, press "space" or left-click the expression. Right-clicking the expression reverses the flow of time.
-To limit  the time variable from 0 to 10, you can add "t0=0 t1=10". If you want one second of real time to correspond to one second of the mathematical time, add "realtime"
+To limit  the time variable from 0 to 10, you can add "t0=0 t1=10". If you want one second of real time to correspond to one second of the mathematical time, add the modifier "realtime"
 (e.g., the animation "sin(t) t0=0 t1=10 realtime" would last 10 s). 
+If, instead of viewing the plot in the pop-up window, you want to save a plot into a .png file, add the "save" modifier. If you want to save the plot data into a text file, add the "data" modifier. All files will be saved 
+into the folder "SavedResults".
 
-The list of all modificators that can be added to the right of the expression and sent to the plotter is:
 
-"from","to","style","pden","grid","polar","cont","hold","anim","equal","save","realtime","t0","t1","tden","slice","reim","legend","data","scale","loglog","hline","vline"
+The list of all modifiers that can be added to the right of the expression and sent to the plotter is (without the quotes):
 
+"from","to","style","pden","grid","polar","cont","anim","equal","save","realtime","t0","t1","tden","slice","reim","legend","data","scale","loglog","hline","vline"
+
+Each modifier accepts an additional expression or keyword, typically "on" or "off". For modifiers that accept "on" or "off", omitting the keyword is the same as setting the modifier to "on" (e.g., "grid" is the same as "grid on").
+
+"from 7 to 12" sets limits to the x-axis. "from 5,7 to e*pi^2,12" sets the limit of the x-axis to (5,e*pi^2) and limits of the y-axis to (7,12).
+"style arg" passes the arg argument as a format string to the pyplot plot (see the "Notes" section at https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.plot.html). E.g. "r--" makes all graphs red and dashed. 
+"pden number" sets the number of points in the graph. For example, a graph produced with pden 10 would consist of ten points.
+"grid on/off" toggles a coordinate grid /default: off, except for polynomials
+"polar on/off" toggles polar plot mode. /default: off, except for variables name r,φ,α,β,γ (note that you can write Greek letters by writing, e.g., \gamma and pressing "space").
+"cont on/off" sets toggles contures in 2-D plots. cont number sets the contour density (higher number means greater number of contures)
+"anim on/off" toggles animations. 
+"equal on" turns on same units on both axes, "equal off" rescales the values so that the plot is always a square /default: off
+"save" saves the plot in the folder "SavedResults" /default: off
+"realtime"  makes one second of real time  correspond to one second of the mathematical time
+"t0 0 t1 1" or "t0=0 t1=1" limits the time variable from 0 to 1 and toggles on animation (you don't have to add the "anim" modifier). 
+"tden number" sets the number of time steps in animations
+"slice 1,2" allows plotting 3-D and higher dimensional vector fields. For example, plot (x,y^2,y^3,xy^4) slice 1,4 shows the vector field (x,xy^4).
+For solutions of ODEs, it can also be used to plots various pairs of variables (e.g. time vs x-coordinate, x-coordinate vs y-coordinate, etc.) #TODO: Better explanation needed
+"reim on/off" toggles showing the real and imaginary part for complex functions. By default, modulus and phase are shown. /default: off
+"legend on/off" toggles on the plot labels. /default: on
+"data" saves the plot data in the folder "SavedResults"
+"scale on/off"  toggles rescaling of all values to lie between 0 and 1 (so that, e.g. y=x and y=10^15*x are mapped to the same graph). /default: off
+"loglog on/off" toggles  the logarithmic scale /default: off
+"hline 7,8" plots two horizontal lines at y=7 and y=8, "vline e" plots a vertical line at x=e.
+
+
+
+
+
+
+#TODO: explain the function of each modifier

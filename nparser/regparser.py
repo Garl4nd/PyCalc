@@ -1459,7 +1459,7 @@ class Parser:
 
     def draw_exprs(self,*expressions,verbose=False,**kwargs):
         for ind,expr in enumerate(expressions):
-            self.parse(expr,draw=True,save=True,filename=f"SavedFigures/Expr. # {ind+1}",**kwargs,verbose=verbose)
+            self.parse(expr,draw=True,save=True,filename=f"SavedResults/Expr. # {ind+1}",**kwargs,verbose=verbose)
 
     def map_iter(self,func,init_point,n=100):
         try:
@@ -2403,7 +2403,7 @@ class Parser:
     def ldiv_and_save(self,*exprlist,**kwargs):
         for ind,expr in enumerate(exprlist):
             
-            self.longdiv(expr,draw=True,save=True,filename=f"SavedFigures/Deleni #{ind+1}",**kwargs)
+            self.longdiv(expr,draw=True,save=True,filename=f"SavedResults/Deleni #{ind+1}",**kwargs)
 
 
 
@@ -2427,9 +2427,9 @@ class Parser:
         if save:
             matplotlib.use("Agg")
             if filename==None:
-                filename="SavedFigures/Plot"
+                filename="SavedResults/Plot"
             else:
-                filename="SavedFigures/"+filename
+                filename="SavedResults/"+filename
         else:
            #matplotlib.use(self.backend)
            matplotlib.use(self.backend)
@@ -3093,9 +3093,9 @@ class Parser:
         if save:
             matplotlib.use("Agg")
             if filename==None:
-                filename="SavedFigures/2DPlot"
+                filename="SavedResults/2DPlot"
             else:
-                filename="SavedFigures/"+filename
+                filename="SavedResults/"+filename
         else:
             #matplotlib.use(self.backend)
             matplotlib.use(self.backend)
@@ -3538,9 +3538,9 @@ class Parser:
         from matplotlib.animation import FuncAnimation
         if save:
             if filename==None:
-                filename="SavedFigures/Anim"
+                filename="SavedResults/Anim"
             else:
-                filename="SavedFigures/"+filename    
+                filename="SavedResults/"+filename    
         if not data:
             return
         
@@ -3704,9 +3704,9 @@ class Parser:
         
         if save:
             if filename==None:
-                filename="SavedFigures/Anim"
+                filename="SavedResults/Anim"
             else:
-                filename="SavedFigures/"+filename    
+                filename="SavedResults/"+filename    
         """
         if polar:
             fig=plt.figure()
@@ -4038,9 +4038,9 @@ class Parser:
 
         if save:
             if filename is None:
-                filename="SavedFigures/Anim"
+                filename="SavedResults/Anim"
             else:
-                filename="SavedFigures/"+filename     
+                filename="SavedResults/"+filename     
             self.anim.save(filename+".mp4",fps=len_t//duration)
         else:
             

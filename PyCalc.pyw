@@ -821,7 +821,7 @@ class Calc(QMainWindow):
             self.error_dialog.showMessage(str(e))
         if get_data and self.parser.plotdata:
             #raise ValueError(np.array(self.parser.plotdata))
-            with open("plotdata.txt","w") as file:
+            with open("SavedResults/plotdata.txt","w") as file:
                 for ind,ar in enumerate(np.array(self.parser.plotdata)):
                     np.savetxt(file,ar.T)
                     if ind+1!=len(ar):
