@@ -512,7 +512,7 @@ class Calc(QMainWindow):
                 text=text[1:]
             else:
                 plot2d=False
-        args="from","to","style","pden","grid","polar","cont","hold","anim","equal","save","realtime","t0","t1","tden","slice","reim","legend","data","scale","loglog","hline","vline"
+        args="from","to","style","pden","grid","polar","cont","hold","anim","equal","save","realtime","t0","t1","tden","slice","reim","legend","data","scale","loglog","hlines","vlines"
         llim=None;ulim=None;t0=None;t1=None;style="";pden=None;tden=None;use_grid=None;polar=None;contours=None;hold=None
         anim=None;point=None;equal=None;save=None;realtime=None;filename=None;v_slice=None;realimag=False;legend=True;get_data=False;scale=False;loglog=False;hlines=[];vlines=[]
 
@@ -610,24 +610,24 @@ class Calc(QMainWindow):
                         tden=int(res)
                     except (TypeError,ValueError):
                         raise ValueError(f"The lower bound '{str(res)}' can't be interpreted as a number!")
-            if parts["hline"]:
+            if parts["hlines"]:
                 try:
-                    hlines=[float(parts["hline"][0])]
+                    hlines=[float(parts["hlines"][0])]
                 except (ValueError,TypeError):
                     try:
-                        res=self.parser.parse(parts["hline"][0],draw=False)
+                        res=self.parser.parse(parts["hlines"][0],draw=False)
                         try: 
                             hlines=[float(el) for el in res]
                         except (ValueError,TypeError):
                             hlines=[float(res)]
                     except (TypeError,ValueError):
                         raise ValueError(f"The expression '{str(res)}' can't be interpreted as a number!")
-            if parts["vline"]:
+            if parts["vlines"]:
                 try:
-                    vlines=[float(parts["vline"][0])]
+                    vlines=[float(parts["vlines"][0])]
                 except (ValueError,TypeError):
                     try:
-                        res=self.parser.parse(parts["vline"][0],draw=False)
+                        res=self.parser.parse(parts["vlines"][0],draw=False)
                         try: 
                             vlines=[float(el) for el in res]
                         except (ValueError,TypeError):

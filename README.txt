@@ -70,7 +70,7 @@ into the folder "SavedResults".
 
 The list of all modifiers that can be added to the right of the expression and sent to the plotter is (without the quotes):
 
-"from","to","style","pden","grid","polar","cont","anim","equal","save","realtime","t0","t1","tden","slice","reim","legend","data","scale","loglog","hline","vline"
+"from","to","style","pden","grid","polar","cont","anim","equal","save","realtime","t0","t1","tden","slice","reim","legend","data","scale","loglog","hlines","vlines"
 
 Each modifier accepts an additional expression or keyword, typically "on" or "off". For modifiers that accept "on" or "off", omitting the keyword is the same as setting the modifier to "on" (e.g., "grid" is the same as "grid on").
 
@@ -93,7 +93,7 @@ For solutions of ODEs, it can also be used to plots various pairs of variables (
 "data" saves the plot data in the folder "SavedResults"
 "scale on/off"  toggles rescaling of all values to lie between 0 and 1 (so that, e.g. y=x and y=10^15*x are mapped to the same graph). /default: off
 "loglog on/off" toggles  the logarithmic scale /default: off
-"hline 7,8" plots two horizontal lines at y=7 and y=8, "vline e" plots a vertical line at x=e.
+"hlines 7,8" plots two horizontal lines at y=7 and y=8, "vlines e" plots a vertical line at x=e.
 
 
 
