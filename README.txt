@@ -32,7 +32,7 @@ Iterated maps, bifurcation diagrams: map(-x/1.04,init) |init=1,2,3 tden 120    m
 Some formulas and simplifications: simp(expr) |expr->sqrt(x)^2,sin(2x),cosh(2x),xsin(x)^2+xcos(x)^2+sinh(x)^2-cosh(x)^2,tan(2x),sinh(2x),exp(ln(x)),simp(exp(ix))
 
 
-All parentheses are interchangable, but must be consistent. For example, both {(x+y)*z)} and ({x+y}*z) are valid and equivalent. However, [{(x+y)*z]} is invalid, because the parentheses are not matching. The expresssion 1,3..10 stands for 1,3,5,7,9. The corresponding decreasing sequence is 9,7..1. 
+All parentheses are interchangable, but must be consistent. For example, both {(x+y)*z)} and ({x+y}*z) are valid and equivalent. However, [{(x+y)*z]} is invalid, because the parentheses are not matching. 
 
 You can use "\" before certain expressions to convert them to special symbols. For example, writing "\sqrt" and pressing "space" converts "\sqrt" to "√[]". As another example, "\nabla"+"space" and "\dot"+"space" 
 yields "∇·", which you can use to calculate the divergence of a vector field. You can also use this to convert Greek letters to their respective symbols (e.g. "\alpha" -> α)
@@ -44,12 +44,16 @@ The "=" operator evaluates the expression at the very end of the calculation, e.
 In contrast, the ":=" operator first assigns the value and then evaluates the expression, so that "x^2' |x:=1" returns 1^2'=0. F
 inally, the operator "->" simply replaces all instances of the substituted string with the string to its right, without evaluating it. For example, "fn(x)fnh(x) |f->si" is the same as writing "sin(x)sinh(x)".
 
-There is also a slight difference between the expressions "4,5,6" and "(4,5,6)". The former is to be understood simply as a list of separate expressions, while the latter is more akin to a mathematical vector, 
+There is also a slight difference between the expressions "4,5,6" and "(4,5,6)". The former is to be understood simply as a sequence of separate expressions, while the latter is more akin to a mathematical vector, 
 with the components representing a single entity. For example, asking the parser to plot "t^2,t^3" produces plots of two separate functions of t, while "(t^2,t^3)" produces a parametric curve with the left and 
 right expression representing its x and y coordinates, respectively. Similarly, "xy,sin(xy)" produces two 2-D plots while "(xy,sin(xy)" produces a single plot of a 2-D vector field. 
 The expression "dot(x,y) |x=(1,2);y=(2,4)" behaves as expected, but with "dot(x,y) |x=1,2;y=2,4" the parser tries to evaluate dot(1,2),dot(1,4),dot(2,2),dot(2,4) and so fails, because the arguments are not vectors.
 
+The expresssion 1,3..10 stands for 1,3,5,7,9. The corresponding decreasing sequence is 9,7..1. If you want to create a vector instead, use the function V, e.g. "V(1,3..10)".
+
 One-letter symbols such as x,y...which are not reserved by the parser (i.e. not i,e,π,+,*, etc.) are automatically converted to variables. For variables with longer names, you need to include the name after the substitution symbol | or where. For example, "var*var | var" is the square of the variable "var", while "var*var" is equivalent to the product of  squares of three variables "v", "a" and "r".
+
+To save an expression for later use, you can use the (greedy) operator "<--". For example, "res <-- cos(x), sin(y)" saves the sequence cos(x), sin(y) to the variable res. You can later see the value of res by evaluating it without arguments ("res") or you can directly evaluate it at a particular point ("res | x=0;y=pi/2").
 
 To plot a function (e.g. sin(x) ), you can either write "plot sin(x)", or you can write "sin(x)" and press ctrl+p or click the "Plot" button. You can plot multiple functions by using commas, e.g. plot x,x^2,x^3 
 To specify the limits (e.g. from 0 to 2π), write "from 0 to 2pi" to the end of the command. 
