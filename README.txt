@@ -1,5 +1,5 @@
 This is an offline, desktop PyQt version of the online expression evaluator at https://garland.pythonanywhere.com/.  
-The offline version offers all the features of the online version as well as animated plots and keyboard shortcuts. It can evaluate and simplify various numerical and algebraic expressions, including substitutions, 
+The offline version offers all the features of the online version as well as interactive animated plots, keyboard shortcuts and special character conversion. It can evaluate and simplify various numerical and algebraic expressions, including substitutions, 
 solve polynomial equations and inequalities,  solve systems of linear equations, perform symbolic differentiation and numerical integration, handle vector calculus, discrete Fourier transform, numerically solve 
 ordinary differential equations, including boundary value problems, evaluate map iterations and bifurcation diagrams, quickly produce plots of functions (1-D and 2-D, including parametric, vector, complex and polar plots) 
 and produce interactive animated plots. 
