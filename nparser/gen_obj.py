@@ -8,23 +8,20 @@ from scipy.special import gamma as cgamma,erf,erfc,binom,beta,ellipkinc,ellipein
 import unicodedata
 from operator import mul,add,pow,truediv
 module_prefix="" #module_prefix=module_prefix_optinos["direct"]  to make eval the inverse of repr
+
 # TODO: komplexní koeficienty u monomů (místo genobj...) -> obecněji to mohou být obecné koeficienty (z GeneralObject)
 # TODO: Řešení rovnic v závislosti na parametru - bylo by nějak těžké přesunout členy monomu ze slovníku do koeficientu? 
 #       Nemělo by být, problém je v tom, že násobení a sčítání je definované přes monomy, takže by se to (asi) muselo ošetřit.
-# TODO: Grafy ve více proměnných  -done
-# TODO: Opravit indexy v Draw_Parse_Tree
-# TODO: Opravit celý Draw_Parse_Tree - hlavně případ kolize unárních a binárních operátorů (je třeba tam udělat víc místa, např 2-#4)
-# TODO: soustavy rovnic (nelineární asi dosazovací metodou?)
+# TODO: Doladit Draw_Parse_Tree - opravit indexy a kolize unárních a binárních operátorů (je třeba tam udělat víc místa, např 2-#4)
+# TODO: soustavy nelineárních rovnic
 # TODO: řešení obecných rovnic aproximativními metodami
-# TODO: krácení polynomů ve více proměnných
-# TODO: x**4+5x=1  padá, asi kvůli výstupu v kvadratických rovnicích
+# TODO: krácení polynomů ve více proměnných - celkem challenge
 # TODO: Ten __getitem__ se mi moc nelíbí, např. teď máme víc způsobů jak získat real a imag z komplexního čísla. Plus tam teď máme derivování. Aby to bylo čistší, tak by se mohlo přesunout z getitem do funkce v regparseru                       
-# TODO: Počítání s nebodovýma funkcema: skládání, derivace, evaluace...jinak asi nepůjdou *parciální* diferenciální rovnice udělat pořádně (například pder h(x)=(-sin(x)) je  teď -1, protože h(x)=f(sin(x)), kde vnější funkce f je f(x)=-x )
+# TODO: Počítání s nebodovýma funkcema: skládání, derivace, evaluace...jinak asi nepůjdou *parciální* diferenciální rovnice udělat pořádně
 #Tím se ale dostáváme k násobení Jacobiánů...
 # TODO: Přidat class derivace: class Deriv(GeneralObject), evaluables: GeneralObject , def eval(self,*dervars): return self.attached.deriv(*dervars), jednak kvůli dif. rovnicím, jednak třeba kvůli reprezentaci derivace dot productu
 # TODO: Přidat funkce pro: transpozice, divergence, curl,matmul, cross
 # Diskutabilní řádka: if all(isinstance(comp,ImplicitVector) for comp in values):
-# TODO: řešit rovnic
 import math
 def ignore(*ignorelist_str):
     def decorator(operator):

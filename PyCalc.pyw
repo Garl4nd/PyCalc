@@ -10,35 +10,27 @@ import matplotlib.pyplot as plt
 import re
 import json 
 # TODO: Do kalkulačky používat format=True, jinak format=False (aby se s tím dalo regulérně pracovat)
-# TODO: Mít nastavení jesli připouštět řešení z C\R (done)
-# TODO: α#1+2*3 se interpretuje jako α, mělo by se to interpretovat jako chybný vstup   
-# TODO: 5Δxyz vyhodí chybu, prepraser by měl za 5 doplnit * (mělo by stačit jen rozšířit doplňování na unární operátory) 
+# TODO: Mít nastavení jesli připouštět řešení z C\R - done
+# TODO: 5Δxyz vyhodí chybu, prepraser by měl za 5 doplnit * (mělo by stačit jen rozšířit doplňování na unární operátory)  - vyřešeno
 # TODO: Nahrazování indexů v draw_parse_tree pořád někdy ostraňuje závorky, chce to tu verzi z plotů
-# TODO: při appendování do paměti posunout pozici o +1 - done
-# TODO: Ošetřit overflow exception, keyboard interrupt v event (try)
-# TODO: Přidat více tlačítek, tlačítko pro nastavení plotu
+# TODO: Ošetřit overflow exception, keyboard interrupt v event
+# TODO: Přidat více tlačítek, např. tlačítko pro nastavení plotu, více řádků
+# TODO: více řádků
+# TODO: možnost ukládat výrazy na HD
 # TODO: Načítání ze souboru
-# TODO: Hezčí vykreslování parsovacího stromu (a je tam třeba opravit vstup u unárních operátorů
-# TODO: Možná dokonce těch sliců budeme chtít víc najednou... číslo => všechny slicy s tím číslem, dvojice čísel => slice, vektor dvojice čísel => všechny takové dvojice
-# TODO: slice tedy i pro vektorová pole...pokud je slice None, tak ukázat všechny, jinak zvolený slice
-# TODO: Mít správně labely pro ode, i vzhledem k slicům
-# TODO: Mít dx,dy pro diferenciální veličiny je nepraktické, protože se musí pořád zadávat |dx;dy -> co mít korespondenci dx <->d, dy <->e ? 
-# TODO: dx a dy zatím vyřešeno přidáním pevných proměnných dx a dy...
-# TODO: Celé to kreslení konstant je nějaké divné...například když se vloží (explicitní) vektor, tak se  mnohokrát překreslí ta samá věc
-# TODO: Maps: komplexní hodnoty
+# TODO: vektor dvojice čísel u slicu => nakreslit více sliců najednou
 # TODO: BVP: Přidat možnost a) definovat proměnné b) definovat parametry
 # TODO: Přidat možnost specifikovat "title"
-# TODO: x_1*7 -> xxxxxxx (opravit, asi by stačilo buď u variablu to vůbec nepřidávat jako attached argument nebo tam zakázat indexování)
+# TODO: opravit x_1*7 -> xxxxxxx (opravit, asi by stačilo buď u variablu to vůbec nepřidávat jako attached argument nebo tam zakázat indexování)
 # nice: [b(k-1)]sin(t)-bsin[t(k-1)],[b(k-1)]cos(t)+bcos[t(k-1)] |b=2;k=0.25,0.5,1.25,5 from -6pi to 6pi
 # s[b(k-1)]sin(t)-bsin[t(k-1)],[b(k-1)]cos(t)+bcos[t(k-1)] |s=-1,1;b=2;k=0.25 from -6pi to 6pi 
-# regparser: "V <- x" zruší celou vektorovou funkci, měla by být možnost to vrátit zas zpátky...
+
 # regparser: ode a bvp se chovají divně, když je moc málo proměnných, například tohle dá chybu (špatný slice): ode([t,0],(0,0)) -> Mělo by být vždy n+1 proměnných, kde n je dimenze počátečního bodu (a ideálně y až druhá proměnná, pokud n>=2)
 # regparser: bvp...nedá se nějak lépe vymyslet specifikace těch okrajů? Třeba přes čísla argumentů schovaných do vektoru: ((1,1,0),(1,2,-20))
 # dilatace času: (1/gamma*t,k) |gamma-> (1/√[1-(0.025*k)^2]) ; k=0..39  from 0 to 10 anim point 
 # šikmý vrh s odporem vzduchu: ode([H(y)dx,H(y)dy,-knorm((dx,dy))sign(dx),g-knorm((dx,dy))sign(dy)],[0,1,10,10]) |g=-10;k=0,0.05..1 t1 5 tden 1000 anim point realtime 
 # Rovnice na výpočet BMR: 11*m-3*a+272*g+777 |m=80;a=30;g=1
-# TODO: více řádků
-# TODO: možnost ukládat výrazy na HD
+
 class StretchedButton(QPushButton):
     def __init__(self,lab,resfactor):
         self.resfactor=resfactor

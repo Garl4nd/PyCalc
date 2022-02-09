@@ -19,37 +19,29 @@ Quotient,Variable,PrettyVariable,Complex,
 Equation,Inequality,SystemOfEqs,Solution,GeneralObject)
 from . import appr_polsolve
 
-#[b(k-1)]cos(t)+bcos[t(k-1)],[b(k-1)]sin(t)-bsin[t(k-1)] |b=1;k=1/3,1/2,1/4,0.65,1.5,4,6 from 0 to 320pi pden 10000
-# TODO: implicitni doplnění pro závorky a unární operátory: (x-1)#2 
-# TODO: plotování komplexnich cisel do komplexní roviny
-# TODO: Místo implicit_ops a implicit_op= mít jen jednu volbu implicit_op="" a nedoplňovat jestliže to bude "".
-# TODO: x**5 hlásí dělení nulou, co za to může? -> fujiwara
-# TODO: iterplot, bifurcation diagram
-# TODO: zadání Lagrangiánu -> animace
-# TODO: -> by z konzistence mělo taky vracet jen jeden plochý vektor -> nejdřív nasbírat všechny substituce, kde jsou čárky a potom z nichudělat jeden vektor přes product
-# TODO: Bod nahoře splněn, možná by to ještě by to chtělo přepínač na nested verzi
-# TODO: "V(sin(xt),cos(xt)) anim" v plot(...) vyhodí chybu, přitom by to mohlo být vektorové pole
-# TODO: Cross by měla být standardní funkce (teď nefunguje cross(x,y)  |x=(1,2);y=(2,3) )
-# TODO: (cos(xt),sin(xt)) anim -> The indices of the slice are out of bounds!
-# TODO: Potřebujeme nějakou obecnou funkci, co abstraktně reprezentuje reálnou a imaginární část
+# TODO: implicitni doplnění pro závorky a unární operátory? : (x-1)#2 -> (x-1)*#2 - done
+# TODO: plotování komplexnich cisel do komplexní roviny - done
+# TODO: x**5 hlásí dělení nulou, co za to může? - solved
+# TODO: iterplot, bifurcation diagram - done
+# TODO: zadání Lagrangiánu -> vyřešení pohybových rovnic a animace <3 
+# TODO: -> by  konzistence mělo taky vracet jen jeden plochý vektor -> done
+# TODO: "V(sin(xt),cos(xt)) anim" v plot(...) vyhodí chybu, přitom by to mohlo být vektorové pole. Pro 2D ploty to funguje jak má.
 # TODO: Umožnit kreslení všech páru proměnných u řešení diferenciálních rovnic (všechny slicy), to znamená, že dif_eq_plot asi bude muset převzít zodpovědnost za vytváření, ukazování, ukládání a zavírání obrázků
-# TODO: matmul,dot,cross... by měly být obecné funkce, aby byla schopna přijímat obecné argumenty (dosazování)
-# TODO: plot bodů by mohl umět ukazovat reálnou a imag část vs pořadí, asi jako volba mezi parametry
-# TODO: maticové výpočty - eigenvalues, inverses...už je to tušim implementovaný v solveru rovnic. 
-# TODO: xt,xt,xt |t=1,2,3 hází chybu, nemělo by (příklad:(√[2000RT/M],t/n),(√[8000RT/M/π],t/n),(√[3000RT/M],t/n),MB(v,T,M) |T=100,293.15;M=29;R=8.3;n=300000000
-# TODO: V(IV(x)) by mělo dát V(x) a IV(V(x)) by mělo dát IV(x)
-# TODO: Když do plot2 vejde vektor konstantních vektorů, mají se nakreslit v rovině jako body?
-# TODO: 0 , x^4 + y^4 - 6x^2y^2 - 6y^3 + 18x^2y - 11x^2 + 11y^2 - 6y + i(4x^3y - 4xy^3 - 6x^3 + 18xy^2 - 22xy + 6x) hází chybu
+# TODO: matmul,dot,cross by měly být obecné funkce, aby byly schopny přijímat obecné argumenty (vyhodnocování přes =). real a imag by měly mít obecné alternativy. 
+# TODO: plot bodů by mohl umět ukazovat reálnou a imag část vs pořadí - done
+# TODO: maticové výpočty - eigenvalues, inverses...nakonec už to implementovaný v solveru soustav lin. rovnic. 
+# TODO: V(IV(x)) by mělo dát V(x) - done
+# TODO: Když do plot2 vejde vektor konstantních vektorů, mají se nakreslit v rovině jako body? - ne, od toho je plot
 # TODO: difeq by měla rovnou zahrnovat parametry, které se hned dosadí...tím by se to mohlo hodně zrychlit i zhezčit výpis
-# 1*return self.parse(text,replace_forbidden=False)" hází chybu. ! Ale mul ano
-# mocnění na vektor byx mělo vrátit vektor by mělo vrátit vekttor mocnin
-# if not newsymb in text: spekulativní a provizorní!
-# TODO: (x-t)^2+y^2=1
-# TODO: (cos(kt),sin(kt)) anim k
+#TODO # mocnění na vektor byx mělo vrátit vektor by mělo vrátit vekttor mocnin - done
+#TODO: # if not newsymb in text: provizorní? Ale if it ain't broke don't fix it.
+# TODO: (x-t)^2+y^2=1 -> bylo by hezké dostat animaci posouvající se kružnice
+# TODO: přidat možnost explicitně specifikovat, v jaké proměnné se má dělat animace. Návrh: "sin(xt) anim x" 
 # TODO: H(t-u)real(sqrt((t-u)^2 - (x-u)^2+0i)) |u=1,1.2..10 realtime t0=0 t1=10   from 0 to 10  #ukazuje se jen druhá polovina?? Ale když se to nejdřív spočítá a až pak nakreslí, tak to jde
 # TODO: Hezčí bifurkační funkce a lepší výstup (nebo vstup), aby to neukazovalo milion "BIfurc map with init point..." etc.
 # TODO: Na netu nefunguje tden=500
-# TODO: "?" hlásí chybu v re (tj. spadne Pycalc, protože tu neošetřuju).
+# TODO: "?" hlásí chybu v re (tj. spadne Pycalc, protože to tam neošetřuju). 
+# regparser: "V <- x" zruší celou vektorovou funkci, měla by být možnost to vrátit zas zpátky, nebo zakázat přiřazování k předdefinovaným proměnným
 
 class Op:
     def __init__(self,symbol:str,pri: int,arity: int,action: Callable,
@@ -408,7 +400,7 @@ class Parser:
             while letind<len(text):
                 #print(letind)
                 letter=text[letind]
-                if letter not in self.symbols.union({"."," ",",","|"}) and not letter.isdigit(): #is the letter missing from symbols?
+                if letter not in self.symbols.union({"."," ",",","|",}) and not letter.isdigit(): #is the letter missing from symbols?
                     found,new_ind=self.is_substring(text,letind)
                     if not found:
                         if self.implicit_conversion:

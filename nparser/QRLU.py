@@ -8,7 +8,7 @@ def LUdecomp(A):
     nx,_=np.shape(U)
     L=np.eye(nx)
     perms=[]
-    for n in range(nx-1):
+    for n in range(nx-1): #pivoting
         if abs(U[n,n])<tol:
         #    print("zero")
             for i in range(n+1,nx):
@@ -23,16 +23,14 @@ def LUdecomp(A):
                   #  P[i,n],P[n,i]=1,1
                     
             else:
-                li=0
-                L[n,n+1:]=li
-                continue
+                L[n,n+1:]=0
     #print("permuted U:",U)
-    for n in range(nx-1):
-        li=U[n+1:,n]/U[n,n]
+    for n in range(nx-1): #Gaussova eliminace
+        li=U[n+1:,n]/U[n,n] 
         #for i in range(n+1,nx):
         #    U[i,:]=U[i,:]-li[i-n-1]*U[n,:]
         U[n+1:,:]=U[n+1:,:]-np.outer(li,U[n,:])
-        L[n+1:,n]=li
+        L[n+1:,n]=li #neměla by tu být inverze?
     
     return L,U,perms
 
@@ -88,11 +86,6 @@ def QRdecomp(A):
             r+=1
             if r==nx:
                 break
-            
-        
-    
-
-    
     r=len(es)
     for i in range(r,nx):
         while True:
