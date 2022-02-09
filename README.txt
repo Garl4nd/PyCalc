@@ -2,7 +2,7 @@ This is an offline, desktop PyQt version of the online expression evaluator at h
 The offline version offers all the features of the online version as well as animated plots and keyboard shortcuts. It can evaluate and simplify various numerical and algebraic expressions, including substitutions, 
 solve polynomial equations and inequalities,  solve systems of linear equations, perform symbolic differentiation and numerical integration, handle vector calculus, discrete Fourier transform, numerically solve 
 ordinary differential equations, including boundary value problems, evaluate map iterations and bifurcation diagrams, quickly produce plots of functions (1-D and 2-D, including parametric, vector, complex and polar plots) 
-and produce controllable animated plots. 
+and produce interactive animated plots. 
 If you have Python3 installed, you can launch it by running the file pycalc.pyw. This requires the installation of packages PyQT, numpy, scipy and matplotlib. 
 If you have the pyinstaller package, you can create an executable version, by running install.bat.
 
