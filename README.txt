@@ -4,15 +4,15 @@ solve polynomial equations and inequalities,  solve systems of linear equations,
 ordinary differential equations, including boundary value problems, evaluate map iterations and bifurcation diagrams, quickly produce plots of functions (1-D and 2-D, including parametric, vector, complex and polar plots) 
 and produce interactive animated plots. 
 If you have Python3 installed, you can launch it by running the file pycalc.pyw. This requires the installation of packages PyQT, numpy, scipy and matplotlib. 
-If you have the pyinstaller package, you can create an executable version, by running install.bat.
+If you have the pyinstaller package, you can create an executable version by running install.bat.
 
-Examples commands:
+Examples expressions and commands:
 
 Numerical expressions: 3+1-4*2    45+6*32*{4[4-[7^2]]}**3    5!*e^(i*pi)    real([4+i]^2), imag[sqrt(i)]    (1,3..9)^2    sum(1..10)    mul([12,10...2])
 Fractions: Q(3, 4)+Q(1, 2)   Q[1,Q(3, 4)+Q(1, 2)]    Q(1,6)/Q(1,2)    Q[Q(1,6),Q(1,2)]
 Long division: 3x+2x**2+5+4x**4:x+1
 Factorization, greatest common divisor and lowest common multiple: decomp(12366)   decomp(x^4 + 6x^3 + 11x^2 + 6x)   parents(24)   parents(24,2)   parents(x^3 - 6x^2 + 11x - 6)   gcd(60,90,450)   lcm(60,90,450)
-Algebraic and general expressions: (x+2)^2/(x+2)*(x-4)**2   ### x+1      (### x+1) - {[(x+1)^2]^2}^2    sin(pi*x)exp(-x^2)*e*y^2*sin(pi*x)^3    (sum{(-1)^(k)*x^(2k+1)/(2k+1)! |k=0..n} |n:=0..4), sin(x) from -pi to pi
+Algebraic and general expressions: (x+2)^2/(x+2)*(x-4)**2   ### x+1      (### x+1) - {[(x+1)^2]^2}^2    sin(pi x)exp(-x^2)e*y^2*tanh(AnyVariable)^3 |AnyVariable    (sum{(-1)^(k)*x^(2k+1)/(2k+1)! |k=0..n} |n:=0..4), sin(x) from -pi to pi
 Algebraic equations and inequalities in one variable: 12x+2=30   (x+3)/5=(x-4)/2   x^5+3x^2=7x-4    x**8=1    x^4 - 10x^3 + 35x^2 - 50x >=-24
 Systems of linear equations: 3x+2y-z=5;2x+y+z=6;x+y+z=7    x+y=5;2x+2y=10    2x+y=5;3x+y=7;4x+y=1
 Evaluation of general expressions: xy*tan(z) where x=4;z=7     x^2sin(y) |y=pi/2;x=1,3...9     f(x) |f->sin,cos,tan,atan;x=(0,pi/6,pi/4,pi/3,pi/2)     x^2 where x=sin(y) where y=cos(z)     x^2 | x=sin(y) | y=cos(z)     exp(-x)' | x=4    sum([x^2 where x=1,3..11])    mul([x^2 where x=2,4..10])
@@ -32,7 +32,7 @@ Iterated maps, bifurcation diagrams: map(-x/1.04,init) |init=1,2,3 tden 120    m
 Some formulas and simplifications: simp(expr) |expr->sqrt(x)^2,sin(2x),cosh(2x),xsin(x)^2+xcos(x)^2+sinh(x)^2-cosh(x)^2,tan(2x),sinh(2x),exp(ln(x)),simp(exp(ix))
 
 
-All parentheses are interchangable, but must be consistent. For example, both {(x+y)*z)} and ({x+y}*z) are valid and equivalent. However, [{(x+y)*z]} is invalid, because the parentheses are not matching. 
+All parentheses are interchangable, but must be consistent. For example, both {(x+y)*z)} and ({x+y}*z) are valid and equivalent. However, [{(x+y)*z]} is invalid, because the parentheses are not matching. The expresssion 1,3..10 stands for 1,3,5,7,9. The corresponding decreasing sequence is 9,7..1. 
 
 You can use "\" before certain expressions to convert them to special symbols. For example, writing "\sqrt" and pressing "space" converts "\sqrt" to "√[]". As another example, "\nabla"+"space" and "\dot"+"space" 
 yields "∇·", which you can use to calculate the divergence of a vector field. You can also use this to convert Greek letters to their respective symbols (e.g. "\alpha" -> α)
@@ -48,6 +48,8 @@ There is also a slight difference between the expressions "4,5,6" and "(4,5,6)".
 with the components representing a single entity. For example, asking the parser to plot "t^2,t^3" produces plots of two separate functions of t, while "(t^2,t^3)" produces a parametric curve with the left and 
 right expression representing its x and y coordinates, respectively. Similarly, "xy,sin(xy)" produces two 2-D plots while "(xy,sin(xy)" produces a single plot of a 2-D vector field. 
 The expression "dot(x,y) |x=(1,2);y=(2,4)" behaves as expected, but with "dot(x,y) |x=1,2;y=2,4" the parser tries to evaluate dot(1,2),dot(1,4),dot(2,2),dot(2,4) and so fails, because the arguments are not vectors.
+
+One-letter symbols such as x,y...which are not reserved by the parser (i.e. not i,e,π,+,*, etc.) are automatically converted to variables. For variables with longer names, you need to include the name after the substitution symbol | or where. For example, "var*var | var" is the square of the variable "var", while "var*var" is equivalent to the product of  squares of three variables "v", "a" and "r".
 
 To plot a function (e.g. sin(x) ), you can either write "plot sin(x)", or you can write "sin(x)" and press ctrl+p or click the "Plot" button. You can plot multiple functions by using commas, e.g. plot x,x^2,x^3 
 To specify the limits (e.g. from 0 to 2π), write "from 0 to 2pi" to the end of the command. 
