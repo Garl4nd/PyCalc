@@ -18,7 +18,7 @@ from .gen_obj import (SPolynomial,Polynomial,Monom,Vector,ImplicitVector,
 Quotient,Variable,PrettyVariable,Complex,
 Equation,Inequality,SystemOfEqs,Solution,GeneralObject)
 from . import appr_polsolve
-
+# TODO: Přidat do animací volbu fps - teď je možné jen rychlost 1:1 nebo jak vyjde podle velikosti časového kroků ((t1-t0)/tden)
 # TODO: implicitni doplnění pro závorky a unární operátory? : (x-1)#2 -> (x-1)*#2 - done
 # TODO: plotování komplexnich cisel do komplexní roviny - done
 # TODO: x**5 hlásí dělení nulou, co za to může? - solved
@@ -2401,7 +2401,7 @@ class Parser:
 
     #import numpy
     def plot(self,*objs,llim=None,ulim=None,t0=0,t1=2*math.pi,tden=1000,pden=None,style="",save=False,filename=None,polar=None,
-    use_grid=None,contours=None,hold=False,anim=False,pointanim=False,equal=False,realtime=False,realimag=False,v_slice=None,legend=True,scale=False,loglog=False,hlines=[],vlines=[],**at):
+    use_grid=None,contours=None,hold=False,anim=False,pointanim=False,equal=False,realtime=False,realimag=False,v_slice=None,legend=True,scale=False,loglog=False,hlines=[],vlines=[],animt=None,**at):
         self.ac=self.AnimControl()
         show2D=False
         waveanim=False
@@ -2718,13 +2718,18 @@ class Parser:
                             ps=pden if pden<250 else 250
                         
                         self.plot2(obj,llim=llim,ulim=ulim,pden=ps,style=style,save=save,realimag=realimag,filename="2DPlot",use_grid=use_grid,polar=polar,contours=contours,equal=equal,
-                        hold=True,realtime=realtime,v_slice=v_slice,anim=anim,**at)
+                        hold=True,realtime=realtime,v_slice=v_slice,anim=anim,animt=animt,t0=t0,t1=t1,**at)
                         show2D =True
                     continue
                 else:
                     if lv==2:
                         waveanim=True        
-                        timevar,spacevar=sorted(vars)
+                        if animt not in vars: #počítá s tím, že ve vars není nikdy None. Pokud by to byl problém, tak přidat explicitní if not animt is None
+                            timevar,spacevar=sorted(vars) 
+                        else:
+                            timevar=animt
+                            spacevar=next(iter(vars.difference({timevar,})))
+
                         if spacevar in ("f","fi","Φ","α","β","γ","φ","θ"):
                             if polar is None:
                                 polar=True        
@@ -2779,7 +2784,7 @@ class Parser:
             if pden==None:
                 pden=1000
             if waveanim:
-                var=sorted(vars)[-1]
+                var=spacevar #sorted(vars)[-1]
             else:
                 var=sorted(vars)[0]
             varset.add(var)
@@ -3046,7 +3051,7 @@ class Parser:
                 #print(parinds)
                 if waveanim:
                     self.wave_anim(wave_names,grid,wavearr,t0,t1,fig,ax,polar=polar,style=style,equal=equal,save=save,
-                    filename=filename,realtime=realtime,legend=legend,scale=scale)
+                    filename=filename,realtime=realtime,legend=legend,scale=scale,tlabel=timevar)
                 else:
                     self.par_anim(parinds,x0,x1,polar=polar,style=style,equal=equal,pointanim=pointanim,save=save,
                     filename=filename,xlabel=plt.gca().get_xlabel(),ylabel=plt.gca().get_ylabel(),realtime=realtime,legend=legend,scale=scale)
@@ -3078,7 +3083,7 @@ class Parser:
             plt.show()
     
     def plot2(self,*objs,llim=None,ulim=None,pden=None,style="",save=False,filename=None,use_grid=None,contours=None,polar=None,equal=None,
-    hold=False,anim=False,realtime=False,realimag=False,t0=0,t1=2*math.pi,tden=None,v_slice=None,legend=True,**at):
+    hold=False,anim=False,realtime=False,realimag=False,t0=0,t1=2*math.pi,tden=None,v_slice=None,legend=True,animt=None,**at):
         self.ac2=self.AnimControl()
         if contours==True:
             contours=20
@@ -3153,11 +3158,18 @@ class Parser:
                     if t in ("f","fi","Φ","α","β","γ","φ","θ"):
                         var1,var2=var2,var1
                 if anim:
-                    t=chr(ord(sorted((var1,var2))[-1][0])+1)
+                    if "t" in (var1,var2):
+                        if "s" in (var1,var2):
+                            t="p"
+                        else:
+                            t="s"
+                    else:
+                        t="t"
+                    
                 #var1,var2=  "y","z"
                 
             elif lv==2:
-                ivars=iter(vars)
+                ivars=iter(sorted(vars))
                 var1,var2=ivars
                 if polar is None:
                     if var2=="x" or var1=="y":
@@ -3168,13 +3180,41 @@ class Parser:
                     if var2=="r" or var1 in ("f","fi","Φ","α","β","γ","φ","θ"):
                         var1,var2=var2,var1
                 if anim:
-                    var2,t=chr(ord(sorted((var1,var2))[-1][0])+1),var2
+                    if animt in vars:
+                        t=animt
+                        var1=next(iter(vars.difference({animt,})))
+                     #   while var2 in {t,var2}:
+                     #      var2=chr(ord(var2)+1) 
+                    elif "t" in vars:
+                        t="t"
+                        var1=next(iter(vars.difference({"t",})))
+                    else:
+                        
+                        if var1=="x":
+                            t=var2
+                        else:
+                            t,var1=var1,var2
+                    var2="_"#chr(min(ord(var1),ord(t))+1)
+                    while var2 in {t,var1}:
+                        var2=chr(ord(var2)+1)                     
+                    if var1=="y":
+                        var1,var2=var2,var1
+                    #var2,t=chr(ord(sorted((var1,var2))[-1][0])+1),var2
+                    
+
             else:
                 if anim is False or lv>3:
                     raise NotImplementedError("Can only plot functions of at most two variables")
                 else:
                     anim=True
-                    t,var1,var2=sorted(vars)
+                    if not animt in vars:
+                        
+                        t,var1,var2=sorted(vars) 
+                    else:
+                        t=animt
+                        var1,var2=sorted(vars.difference({animt,}))
+
+                    
             if anim:
                 if t0 is None:
                     t0=0
@@ -3603,7 +3643,7 @@ class Parser:
             #    self.ac.frame=len_t-1
             for lind,line in enumerate(lines):    
                 line.set_data(xdata[lind][:self.ac.frame],ydata[lind][:self.ac.frame])
-            time_text.set_text("t = {0:.3f}".format(t0+(self.ac.frame)*dt))
+            time_text.set_text("{tlabel} = {val:.3f}".format(tlabel=xlabel,val=t0+(self.ac.frame)*dt))
             return lines+[time_text]
 
         def pointupdate(_):
@@ -3619,7 +3659,7 @@ class Parser:
 
             for lind,line in enumerate(lines):    
                 line.set_data([xdata[lind][self.ac.frame]],[ydata[lind][self.ac.frame]])
-            time_text.set_text("t = {0:.3f}".format(t0+(self.ac.frame)*dt))
+            time_text.set_text("{tlabel} = {val:.3f}".format(tlabel=xlabel,val=t0+(self.ac.frame)*dt))
             return lines+[time_text]
         
         def onClick(event):
@@ -3690,7 +3730,7 @@ class Parser:
         if equal:
                 plt.gca().set_aspect("equal")
                 
-    def wave_anim(self,names,grid,ydata,t0,t1,fig,ax,polar=False,style="",equal=False,save=False,filename=None,realtime=False,legend=True,scale=False):
+    def wave_anim(self,names,grid,ydata,t0,t1,fig,ax,polar=False,style="",equal=False,save=False,filename=None,realtime=False,legend=True,scale=False,tlabel="t"):
         
         from matplotlib.animation import FuncAnimation
         
@@ -3765,7 +3805,7 @@ class Parser:
           #      self.ac.frame=len_t-1
             for lind,line in enumerate(lines):    
                 line.set_data(grid,ydata[lind][self.ac.frame,:])
-            time_text.set_text("t = {0:.3f}".format(t0+(self.ac.frame)*dt))
+            time_text.set_text("{tlabel} = {val:.3f}".format(tlabel=tlabel,val=t0+(self.ac.frame)*dt))
             return lines+[time_text]
 
         def onClick(event):
@@ -3889,7 +3929,8 @@ class Parser:
         else:
             f_min,f_max=np.min(f),np.max(f)
         global pc,qui
-        pc=ax.pcolormesh(np.empty(np.shape(xgrid)),np.empty(np.shape(xgrid)),np.empty(np.shape(xgrid)),label="2d plot",cmap=cmap)
+        #pc=ax.pcolormesh(np.empty(np.shape(xgrid)),np.empty(np.shape(xgrid)),np.empty(np.shape(xgrid)),label="2d plot",cmap=cmap)
+        pc=ax.pcolormesh([[],[]],label="2d plot",cmap=cmap)
         if vecfield:
             qui=ax.quiver(np.empty(np.shape(dxgrid)),np.empty(np.shape(dygrid)),np.empty(np.shape(dvalgrids[0,ac.frame,:,:])), 
         np.empty(np.shape(dvalgrids[1,ac.frame,:,:])))

@@ -58,15 +58,16 @@ To save an expression for later use, you can use the (greedy) operator "<--". Fo
 To plot a function (e.g. sin(x) ), you can either write "plot sin(x)", or you can write "sin(x)" and press ctrl+p or click the "Plot" button. You can plot multiple functions by using commas, e.g. plot x,x^2,x^3 
 To specify the limits (e.g. from 0 to 2π), write "from 0 to 2pi" to the end of the command. 
 You can also press "ctrl+f" to produce the "from" and move the cursor right behind it. Similarly, press "ctrl+t" to produce the "to".
-To plot a function of two variables (e.g. sin(xy)), you can either write "plot2 sin(xy)", or write "sin(xy)" and press ctrl+i or click the "2D plot" button. 
+To plot a function of two variables (e.g. sin(xy)), you can either write "plot2 sin(xy)", or write "sin(xy)" and press ctrl+i or click the "2D plot" button. If "x" is present, it will be placed on the horizontal axis, 
+if "y" is present, it will be put on the vertical axis. Otherwise, the variable with the lower (higher) rank in the alphabet will be put on the horiontal (vertical) axis.
 If the function is complex, e.g., (x^2+ixy), the plots of its magnitude and phase will be produced. If you want to see the real and imaginary part instead, add "reim" to the end of the target expression (e.g., (x^2+ixy reim)).
 If the expression is a vector field of two variables, e.g., (x,y^2), it will be visualised with the arrows showing direction and colors showing magnitude.
 If it is a 2-D vector field of one variable (e.g. [cos(t),sin(t)] ), using the "plot" command  (or "ctrl+p") produces a para-
 metric plot (circle in this case), while using the "plot2" command (or "ctrl+i") produces a 2-D vector field, assuming that the variable represents the x-coordinate.
 If you use variable names such as "r", or "φ", a polar plot will be produced.  You can turn this off by using the modifier "polar off". Conversely, you can convert any plot to a polar plot by writing "polar on".
 If you want to animate a function, add anim to the end of the expression to be plotted. For example, you can write "plot sin(tx) anim", or write "sin(tx) anim" and press ctrl+p. 
-This also works for functions of three variables, e.g. writing "sin(txy) anim" and pressing ctrl+p produces a 2-D animation. It is always assumed that the  variable that increases with time is the one with lowest 
-rank in the alphabet.
+This also works for functions of three variables, e.g. writing "sin(txy) anim" and pressing ctrl+p produces a 2-D animation. If "t" is not included in the expression, 
+it is always assumed that the time coordinate corresponds to the variable with the lowest rank in the alphabet.
 To control the animation speed, use arrows, to pause the animation, press "space" or left-click the expression. Right-clicking the expression reverses the flow of time.
 To limit  the time variable from 0 to 10, you can add "t0=0 t1=10". If you want one second of real time to correspond to one second of the mathematical time, add the modifier "realtime"
 (e.g., the animation "sin(t) t0=0 t1=10 realtime" would last 10 s). 
@@ -84,9 +85,9 @@ Each modifier accepts an additional expression or keyword, typically "on" or "of
 "style arg" passes the arg argument as a format string to the pyplot plot (see the "Notes" section at https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.plot.html). E.g. "r--" makes all graphs red and dashed. 
 "pden number" sets the number of points in the graph. For example, a graph produced with pden 10 would consist of ten points.
 "grid on/off" toggles a coordinate grid /default: off, except for polynomials
-"polar on/off" toggles polar plot mode. /default: off, except for variables name r,φ,α,β,γ (note that you can write Greek letters by writing, e.g., \gamma and pressing "space").
+"polar on/off" toggles polar plot mode. /default: off, except for variables names "f","fi","φ","Φ","α","β","γ" and "θ" (note that you can write Greek letters by writing, e.g., \gamma and pressing "space").
 "cont on/off" sets toggles contures in 2-D plots. cont number sets the contour density (higher number means greater number of contures)
-"anim on/off" toggles animations. 
+"anim on/off" toggles animations. For functions of one variable, "anim point" displays, for each time t, only the leading point (t,f(t)).
 "equal on" turns on same units on both axes, "equal off" rescales the values so that the plot is always a square /default: off
 "save" saves the plot in the folder "SavedResults" /default: off
 "realtime"  makes one second of real time  correspond to one second of the mathematical time

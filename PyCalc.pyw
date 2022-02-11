@@ -496,6 +496,7 @@ class Calc(QMainWindow):
         try:
             self.handle_plot(text,plot2d=plot2d)
         except  (ValueError,NotImplementedError,TypeError,ZeroDivisionError,AttributeError) as e:
+        #except None: #pro lepší debuggingyz ani
                     self.error_dialog.showMessage(str(e))
     def handle_plot(self,text,plot2d=None):
         if plot2d is None:
@@ -504,9 +505,9 @@ class Calc(QMainWindow):
                 text=text[1:]
             else:
                 plot2d=False
-        args="from","to","style","pden","grid","polar","cont","hold","anim","equal","save","realtime","t0","t1","tden","slice","reim","legend","data","scale","loglog","hlines","vlines"
+        args="from","to","style","pden","grid","polar","cont","hold","anim","equal","save","realtime","t0","t1","tden","slice","reim","legend","data","scale","loglog","hlines","vlines","avar"
         llim=None;ulim=None;t0=None;t1=None;style="";pden=None;tden=None;use_grid=None;polar=None;contours=None;hold=None
-        anim=None;point=None;equal=None;save=None;realtime=None;filename=None;v_slice=None;realimag=False;legend=True;get_data=False;scale=False;loglog=False;hlines=[];vlines=[]
+        anim=None;point=None;equal=None;save=None;realtime=None;filename=None;v_slice=None;realimag=False;legend=True;get_data=False;scale=False;loglog=False;avar=None;hlines=[];vlines=[]
 
         found={pat:list(self.parser.find_all(text,pat)) for pat in args}
         
@@ -677,7 +678,7 @@ class Calc(QMainWindow):
                 elif g=="off" or  g.strip()=="0":
                     hold=False
                 else:
-                    raise ValueError("Specify 'cont'  with either 'on'/'off' or '1'/'0'" )
+                    raise ValueError("Specify 'hold'  with either 'on'/'off' or '1'/'0'" )
             if parts["anim"]:                
                 g=parts["anim"][0].strip()
                # print(g)
@@ -691,7 +692,13 @@ class Calc(QMainWindow):
                     anim=False
                 
                 else:
-                    raise ValueError("Specify 'cont'  with either 'on'/'off' or '1'/'0'" )
+                    raise ValueError("Specify 'anim'  with either 'on'/'off', '1'/'0' or 'point'" )
+
+            if parts["avar"]:                
+                avar=parts["avar"][0].strip()
+                anim=True
+                
+
             if parts["realtime"]:
                 g=parts["realtime"][0].strip()
                 if g=="on" or g=="" or g.strip()=="1":
@@ -780,7 +787,7 @@ class Calc(QMainWindow):
                 else:
                     reslist=(res,)
                 self.parser.plot2(*reslist,llim=llim,ulim=ulim,style=style,pden=pden,use_grid=use_grid,polar=polar,contours=contours,equal=equal,save=save,filename=filename,
-                realtime=realtime,anim=anim,t0=t0,t1=t1,tden=tden,realimag=realimag,v_slice=v_slice,legend=legend)
+                realtime=realtime,anim=anim,t0=t0,t1=t1,tden=tden,realimag=realimag,v_slice=v_slice,legend=legend,animt=avar)
             else:
                 try:
                     vars=res.get_vars()
@@ -800,7 +807,8 @@ class Calc(QMainWindow):
                         #    return
                 #print("res:",res)
                 self.parser.plot(*res,llim=llim,ulim=ulim,style=style,pden=pden,t0=t0,t1=t1,tden=tden,use_grid=use_grid,polar=polar,contours=contours,
-                                hold=hold,anim=anim,pointanim=point,equal=equal,save=save,filename=filename,realtime=realtime,v_slice=v_slice,realimag=realimag,legend=legend,scale=scale,loglog=loglog,hlines=hlines,vlines=vlines)
+                                hold=hold,anim=anim,pointanim=point,equal=equal,save=save,filename=filename,realtime=realtime,v_slice=v_slice,
+                                realimag=realimag,legend=legend,scale=scale,loglog=loglog,hlines=hlines,vlines=vlines,animt=avar)
         except TypeError as e:
             print(e)
             self.error_dialog.showMessage("Error while plotting the graph (maybe unexpected complex values?)")
