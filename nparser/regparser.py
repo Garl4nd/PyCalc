@@ -36,7 +36,7 @@ from . import appr_polsolve
 #TODO # mocnění na vektor byx mělo vrátit vektor by mělo vrátit vekttor mocnin - done
 #TODO: # if not newsymb in text: provizorní? Ale if it ain't broke don't fix it.
 # TODO: (x-t)^2+y^2=1 -> bylo by hezké dostat animaci posouvající se kružnice
-# TODO: přidat možnost explicitně specifikovat, v jaké proměnné se má dělat animace. Návrh: "sin(xt) anim x" 
+# TODO: přidat možnost explicitně specifikovat, v jaké proměnné se má dělat animace. Návrh: "sin(xt) anim x" - done, ale místo anim x se píše avar x.
 # TODO: H(t-u)real(sqrt((t-u)^2 - (x-u)^2+0i)) |u=1,1.2..10 realtime t0=0 t1=10   from 0 to 10  #ukazuje se jen druhá polovina?? Ale když se to nejdřív spočítá a až pak nakreslí, tak to jde
 # TODO: Hezčí bifurkační funkce a lepší výstup (nebo vstup), aby to neukazovalo milion "BIfurc map with init point..." etc.
 # TODO: Na netu nefunguje tden=500

@@ -101,3 +101,4 @@ For solutions of ODEs, it can also be used to plots various pairs of variables (
 "scale on/off"  toggles rescaling of all values to lie between 0 and 1 (so that, e.g. y=x and y=10^15*x are mapped to the same graph). /default: off
 "loglog on/off" toggles  the logarithmic scale /default: off
 "hlines 7,8" plots two horizontal lines at y=7 and y=8, "vlines e" plots a vertical line at x=e.
+"avar var" turns on animations and specifies that "var" corresonds to the time variable. For example, "tsin(x) avar x" produces an animation with the time variable corresponding to x.
