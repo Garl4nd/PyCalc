@@ -49,7 +49,9 @@ with the components representing a single entity. For example, asking the parser
 right expression representing its x and y coordinates, respectively. Similarly, "xy,sin(xy)" produces two 2-D plots while "(xy,sin(xy)" produces a single plot of a 2-D vector field. 
 The expression "dot(x,y) |x=(1,2);y=(2,4)" behaves as expected, but with "dot(x,y) |x=1,2;y=2,4" the parser tries to evaluate dot(1,2),dot(1,4),dot(2,2),dot(2,4) and so fails, because the arguments are not vectors.
 
-The expresssion 1,3..10 stands for 1,3,5,7,9. The corresponding decreasing sequence is 9,7..1. If you want to create a vector instead, use the function V, e.g. "V(1,3..10)".
+The expresssion 1,3..10 stands for 1,3,5,7,9. The corresponding decreasing sequence is 9,7..1. If you want to create a vector instead, use the function V, e.g. "V(1,3..10)". You can naturally chain the .. list creator 
+with regular list enumeration: "(n,n^2)|n=1,2,4,7,9..15,25"  produces "( 1 , 1 ) , ( 2 , 4 ) , ( 4 , 16 ) , ( 7 , 49 ) , ( 9 , 81 ) , ( 11 , 121 ) , ( 13 , 169 ) , ( 15 , 225 ) , ( 25 , 625 )". 
+
 
 One-letter symbols such as x,y...which are not reserved by the parser (i.e. not i,e,π,+,*, etc.) are automatically converted to variables. For variables with longer names, you need to include the name after the substitution symbol | or where. For example, "var*var | var" is the square of the variable "var", while "var*var" is equivalent to the product of  squares of three variables "v", "a" and "r".
 
