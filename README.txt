@@ -61,7 +61,7 @@ For example, "var*var | var" is the square of the variable "var", while "var*var
 
 To save an expression for later use, you can use the (greedy) operator "<--". For example, "res <-- cos(x), sin(y)" saves the sequence "cos(x), sin(y)" to the variable "res". You can later recover "res" by evaluating it without arguments ("res") or you can directly evaluate it at a particular point ("res | x=0;y=pi/2").
 You can also save function definitions. For example, the following expression binds the Lorentz transformation of the event (x,t) with speed v and light-speed c=1 to the function LT:
-"LT(x,t,v) <-- f(x,t,v,1) where f(x,t,v,c):= { [(x-vt)/gamma(v,c),(t-vx/c^2)/gamma(v,c)] | gamma(v,c):=sqrt(1-v^2/c^2) }". You can now use LT(x,t,v) in expressions, e.g. "plot path, LT(path_1,path_2,0.5) where path:=(0.01t^2,t)".
+"LT(x,t,v) <-- f(x,t,v,1) where f(x,t,v,c):= { [(x-vt)/gamma(v,c),(t-vx/c^2)/gamma(v,c)] | gamma(v,c):=sqrt(1-v^2/c^2) }". You can then use LT(x,t,v) in expressions, e.g. "plot path, LT(path_1,path_2,0.5) where path:=(0.01t^2,t)".
 
 To plot a function (e.g. sin(x) ), you can either write "plot sin(x)", or you can write "sin(x)" and press ctrl+p or click the "Plot" button. You can plot multiple functions by using commas, e.g. plot x,x^2,x^3 
 To specify the limits (e.g. from 0 to 2π), write "from 0 to 2pi" to the end of the command. 
@@ -92,11 +92,11 @@ Each modifier accepts an additional expression or keyword, typically "on" or "of
 "from 7 to 12" sets limits to the x-axis. "from 5,7 to e*pi^2,12" sets the limit of the x-axis to (5,e*pi^2) and limits of the y-axis to (7,12).
 "style arg" passes the arg argument as a format string to the pyplot plot (see the "Notes" section at https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.plot.html). E.g. "r--" makes all graphs red and dashed. 
 "pden number" sets the number of points in the graph. For example, a graph produced with pden 10 would consist of ten points.
-"grid on/off" toggles a coordinate grid /default: off, except for polynomials
+"grid on/off" toggles the coordinate grid /default: off, except for graphs of polynomials
 "polar on/off" toggles polar plot mode. /default: off, except for variables names "f","fi","φ","Φ","α","β","γ" and "θ" (note that you can write Greek letters by writing, e.g., \gamma and pressing "space").
-"cont on/off" sets toggles contures in 2-D plots. cont number sets the contour density (higher number means greater number of contures)
+"cont on/off" toggles contures in 2-D plots. "cont number" can be used to modify the contour density (higher number means greater number of contures)
 "anim on/off" toggles animations. For functions of one variable, "anim point" displays, for each time t, only the leading point (t,f(t)).
-"equal on" turns on same units on both axes, "equal off" rescales the values so that the plot is always a square /default: off
+"equal on" forces same units on both axes, "equal off" rescales the u so that the plot is always a square /default: off<
 "save" saves the plot in the folder "SavedResults" /default: off
 "realtime"  makes one second of real time  correspond to one second of the mathematical time
 "t0 0 t1 1" or "t0=0 t1=1" limits the time variable from 0 to 1 and toggles on animation (you don't have to add the "anim" modifier). 
