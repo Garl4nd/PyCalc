@@ -41,24 +41,27 @@ The "|" and "where" symbols are equivalent, they are used to manipulate the expr
 their scope is limited by the first enclosing pair of parenthesses.
 The assignments are performed with the operators "=",":=" and "->". Even though these operators are often interchangable in practice,  their functions differ. 
 The "=" operator evaluates the expression at the very end of the calculation, e.g. "x^2' |x=1" first calculates the derivative "2x" of the function "x^2" and then evaluates the result at x=1, yielding 2. 
-In contrast, the ":=" operator first assigns the value and then evaluates the expression, so that "x^2' |x:=1" returns 1^2'=0. F
-inally, the operator "->" simply replaces all instances of the substituted string with the string to its right, without evaluating it. For example, "fn(x)fnh(x) |f->si" is the same as writing "sin(x)sinh(x)".
-The := operator (and only that operator) allows defining custom functions. For example: "gamma(v,c) | gamma(x,y):=sqrt(1-x^2/y^2)".  
+In contrast, the ":=" operator first assigns the value and then evaluates the expression, so that "x^2' |x:=1" returns 1^2'=0. 
+The := operator (and only that operator) also allows defining custom functions. For example: "lorentz(0.5,1)*lorentz(0.2,1) | lorentz(v,c):=sqrt(1-v^2/c^2)".
+Finally, the operator "->" simply replaces all instances of the string to its left with the string to its right, without evaluating it. For example, "fn(x)fnh(x) |f->si" is the same as writing "sin(x)sinh(x)".
+Unless you specifically want to evaluate functions at particular points, I recommend using the ":=" operator.
 
 There is a slight difference between the expressions "4,5,6" and "(4,5,6)". The former is to be understood simply as a sequence of separate expressions, while the latter is more akin to a mathematical vector, 
 with the components representing a single entity. For example, asking the parser to plot "t^2,t^3" produces plots of two separate functions of t, while "(t^2,t^3)" produces a parametric curve with the left and 
 right expression representing its x and y coordinates, respectively. Similarly, "xy,sin(xy)" produces two 2-D plots while "(xy,sin(xy)" produces a single plot of a 2-D vector field. 
 The expression "dot(x,y) |x=(1,2);y=(2,4)" behaves as expected, but with "dot(x,y) |x=1,2;y=2,4" the parser tries to evaluate dot(1,2),dot(1,4),dot(2,2),dot(2,4) and so fails, because the arguments are not vectors.
 
-The expresssion 1,3..10 stands for 1,3,5,7,9. The corresponding decreasing sequence is 9,7..1. If you want to create a vector instead, use the function V, e.g. "V(1,3..10)". You can naturally chain the .. list creator 
+The expresssion 1,3..10 stands for "1,3,5,7,9". The corresponding decreasing sequence is "9,7..1". If you want to create a vector instead, use the function V, e.g. "V(1,3..10)". You can naturally chain the .. list creator 
 with regular list enumeration: "(n,n^2)|n=1,2,4,7,9..15,25"  produces "( 1 , 1 ) , ( 2 , 4 ) , ( 4 , 16 ) , ( 7 , 49 ) , ( 9 , 81 ) , ( 11 , 121 ) , ( 13 , 169 ) , ( 15 , 225 ) , ( 25 , 625 )". 
 
 
-One-letter symbols such as x,y...which are not reserved by the parser (i.e. not i,e,π,+,*, etc.) are automatically converted to variables. For variables with longer names, you need to include the name after the substitution symbol | or where. For example, "var*var | var" is the square of the variable "var", while "var*var" is equivalent to the product of  squares of three variables "v", "a" and "r".
+One-letter symbols such as x and y which are not reserved by the parser (i.e. not i,e,π,+,*, etc.) are automatically converted to variables. 
+For variables with longer names, you need to include the name after the substitution symbols "|" or "where". 
+For example, "var*var | var" is the square of the variable "var", while "var*var" is equivalent to the product of the squares of the three variables "v", "a" and "r".
 
-To save an expression for later use, you can use the (greedy) operator "<--". For example, "res <-- cos(x), sin(y)" saves the sequence cos(x), sin(y) to the variable res. You can later see the value of res by evaluating it without arguments ("res") or you can directly evaluate it at a particular point ("res | x=0;y=pi/2").
+To save an expression for later use, you can use the (greedy) operator "<--". For example, "res <-- cos(x), sin(y)" saves the sequence "cos(x), sin(y)" to the variable "res". You can later recover "res" by evaluating it without arguments ("res") or you can directly evaluate it at a particular point ("res | x=0;y=pi/2").
 You can also save function definitions. For example, the following expression binds the Lorentz transformation of the event (x,t) with speed v and light-speed c=1 to the function LT:
-"LT(x,t,v)<-- f(x,t,v,1)|f(x,t,v,c):= ([(x-vt)/gamma(v,c),(t-vx/c^2)/gamma(v,c)] |gamma(v,c):=sqrt(1-v^2/c^2))". You can now use LT(x,t,v) in expressions, e.g. "plot curve,LT(curve_1,curve_2,0.5)| curve:=(0.01t^2,t)".
+"LT(x,t,v) <-- f(x,t,v,1) where f(x,t,v,c):= { [(x-vt)/gamma(v,c),(t-vx/c^2)/gamma(v,c)] | gamma(v,c):=sqrt(1-v^2/c^2) }". You can now use LT(x,t,v) in expressions, e.g. "plot path, LT(path_1,path_2,0.5) where path:=(0.01t^2,t)".
 
 To plot a function (e.g. sin(x) ), you can either write "plot sin(x)", or you can write "sin(x)" and press ctrl+p or click the "Plot" button. You can plot multiple functions by using commas, e.g. plot x,x^2,x^3 
 To specify the limits (e.g. from 0 to 2π), write "from 0 to 2pi" to the end of the command. 
