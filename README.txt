@@ -104,9 +104,9 @@ Each modifier accepts an additional expression or keyword, typically "on" or "of
 "slice 1,2" allows plotting 3-D and higher dimensional vector fields. For example, plot (x,y^2,y^3,xy^4) slice 1,4 shows the vector field (x,xy^4).
 For solutions of ODEs, it can also be used to plots various pairs of variables (e.g. time vs x-coordinate, x-coordinate vs y-coordinate, etc.) #TODO: Better explanation needed
 "reim on/off" toggles showing the real and imaginary part for complex functions. By default, modulus and phase are shown. /default: off
-"legend on/off" toggles on the plot labels. /default: on
+"legend on/off" toggles the plot labels /default: on
 "data" saves the plot data in the folder "SavedResults"
 "scale on/off"  toggles rescaling of all values to lie between 0 and 1 (so that, e.g. y=x and y=10^15*x are mapped to the same graph). /default: off
-"loglog on/off" toggles  the logarithmic scale /default: off
+"loglog on/off" toggles the logarithmic scale /default: off
 "hlines 7,8" plots two horizontal lines at y=7 and y=8, "vlines e" plots a vertical line at x=e.
 "avar var" turns on animations and specifies that "var" corresonds to the time variable. For example, "tsin(x) avar x" produces an animation with the time variable corresponding to x.
