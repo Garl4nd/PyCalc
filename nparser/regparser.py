@@ -431,7 +431,7 @@ class Parser:
         lo=len(replaced_symbol)
         ln=len(new_symbol)
         
-        print("n?","n" in self.symbols) #!!!
+       #print("n?","n" in self.symbols) #!!!
         while text:
             found=set()
             for symbol in self.symbols:
@@ -743,11 +743,11 @@ class Parser:
                         
                         if isinstance(value,ImplicitVector): #tady se dá ověřit, jestli to je implicit vector. Pokud ano, tak se dá výraz postupně dosadit a vyhodnotit pro každou složku (?)
                             newtexts=[]
-                            print("OText:",text)
+                            #print("OText:",text)
 
                             for ind,comp in enumerate(value):
                                 new_symb=f"#{symbol}{ind}#"
-                                print("new_symb",symbol,new_symb)
+                                #print("new_symb",symbol,new_symb)
                                 #self.add_operator(symbol,10**4,0,lambda x=comp: x,overwrite=True)    
                                 self.add_operator(new_symb,10**4,0,lambda x=comp: x,overwrite=True)    
                                 #print(newtexts)
@@ -755,7 +755,7 @@ class Parser:
                                 newtexts.append(self.replace_unknown(symbol,new_symb,text))
 
                             text=",".join(newtexts)
-                            print("NText:",text)
+                            #print("NText:",text)
                         else:
                             self.add_operator(symbol,10**4,0,lambda value=value: value,overwrite=True)
                         
@@ -1200,7 +1200,7 @@ class Parser:
                                 res=self.expr_eval2(lp,rp,op,level=level,lbuf=lbuf,rbuf=rbuf)
                                 self.partial_results.append([level,res,"res",None])
                                 return res
-        print(text)
+        #print(text)
         res=self.eval_funcs(text,level=level)
         self.partial_results.append([level,res,"res",None])
         return res

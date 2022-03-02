@@ -38,7 +38,7 @@ class StretchedButton(QPushButton):
 
     def resizeEvent(self, evt):
         font = self.font()
-        font.setPixelSize(self.height() * self.resfactor)
+        font.setPixelSize(int(self.height() * self.resfactor))
         self.setFont(font)
 class StretchedLineEdit(QLineEdit):
     def __init__(self,resfactor):
@@ -46,7 +46,7 @@ class StretchedLineEdit(QLineEdit):
         super().__init__()
     def resizeEvent(self, evt):
         font = self.font()
-        font.setPixelSize(self.height() * self.resfactor)
+        font.setPixelSize(int(self.height() * self.resfactor))
         self.setFont(font)
 # New code ↓
 class myLineEdit(StretchedLineEdit):

@@ -2054,7 +2054,7 @@ class RandomSample(Func): #Popřípadě ošetřit další operace:
         return repr(self)
     def mh(self,f,n=1,dim=1,lims="uni"):
         unbounded=False
-        if lims is "uni":
+        if lims == "uni":
             lims=np.tile([0,1],(dim,1))
             unbounded=True
         lens=[lim[1]-lim[0] for lim in lims ]
