@@ -3750,7 +3750,7 @@ class Parser:
             mngr = plt.get_current_fig_manager()
             geom = mngr.window.geometry()
             x,y,dx,dy = geom.getRect()
-            mngr.window.setGeometry(x+dx/2, y+dy/2, dx, dy)
+            mngr.window.setGeometry(int(x+dx//2), int(y+dy//2), int(dx), int(dy))
         
         #ydata=[tuple(val.real if isinstance(val,(complex,Complex)) else val for val in tup) for tup in ydata]
         
